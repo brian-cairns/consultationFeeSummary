@@ -110,7 +110,7 @@ serviceSummary3.addEventListener('change', (e) => {
 
 document.getElementById('submit').addEventListener("click", async (event) => {
 		console.log('click')
-    submitForm(newForm, form)
+    submitForm(newForm, formName)
 })
 
 async function submitForm(data, form) {
