@@ -35,24 +35,6 @@ date3.addEventListener('change', (e) => {
   console.log(newForm.date3);
   })
   
-let date1 = document.getElementById('date1')
-date1.addEventListener('change', (e) => {
-	newForm.date1 = e.target.value;
-  console.log(newForm.date1);
-})
-  
-let date2 = document.getElementById('date2')
-date2.addEventListener('change', (e) => {
-	newForm.date2 = e.target.value;
-  console.log(newForm.date2);
-})
-  
-let date3 = document.getElementById('date3')
-date3.addEventListener('change', (e) => {
-	newForm.date3 = e.target.value;
-  console.log(newForm.date3);
-  })
-
   let min1 = document.getElementById('min1')
 min1.addEventListener('change', (e) => {
 	newForm.min1 = e.target.value;
