@@ -128,6 +128,7 @@ async function submitForm(data, form) {
     body: JSON.stringify(document)
   })
     .then((response) => {
+      console.log(response)
       if (response.status == 200) {
       showSuccess()
       } else {
@@ -137,7 +138,6 @@ async function submitForm(data, form) {
     .catch((err) => showError(err))
 }
 
-
 function showSuccess() {
     document.getElementById('returnMessage').innerHTML = 'Form has been successfully submitted'
 }
@@ -146,3 +146,5 @@ function showError(err) {
     console.error
     document.getElementById('returnMessage').innerHTML = `An error occurred when submitting this form, which was ${err}. Please contact the administrator for help.`
 }
+
+async function sendNotification() { }
