@@ -111,7 +111,7 @@ serviceSummary3.addEventListener('change', (e) => {
 document.getElementById('submit').addEventListener("click", async (event) => {
 	console.log('click')
   submitForm(newForm, formName);
-  clearForm()
+  
 })
 
 async function submitForm(data, form) {
@@ -137,7 +137,9 @@ function respond(data) {
   let formId = data.formId
   if (formId) {
     showSuccess()
-    sendNotification(formId)
+    let name = newForm.clientId	  
+    sendNotification(formId, name)
+    clearForm()	  
   } else {
     showError(data.error)
   }
@@ -152,12 +154,12 @@ function showError(err) {
     document.getElementById('returnMessage').innerHTML = `An error occurred when submitting this form, which was ${err}. Please contact the administrator for help.`
 }
 
-async function sendNotification(id) {
+async function sendNotification(id, client) {
   let message = `You have a new <br/><a href=phoenix-freedom-foundation-backend.webflow.io/completed-forms/consultation-fee-summary?formId=${id}>Consultation Fee Summary</a>`
   console.log(message)
   const url = 'https://pffm.azurewebsites.net/notices'
   let notification = {
-    'name': clientId,
+    'name': client,
     'notice' : message 
   }
   const header = {
