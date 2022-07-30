@@ -109,8 +109,9 @@ serviceSummary3.addEventListener('change', (e) => {
 
 
 document.getElementById('submit').addEventListener("click", async (event) => {
-		console.log('click')
-    submitForm(newForm, formName)
+	console.log('click')
+  submitForm(newForm, formName);
+  clearForm()
 })
 
 async function submitForm(data, form) {
@@ -152,5 +153,36 @@ function showError(err) {
 }
 
 async function sendNotification(id) {
-  console.log(id)
- }
+  let message = `You have a new <br/><a href=phoenix-freedom-foundation-backend.webflow.io/completed-forms/consultation-fee-summary?formId=${id}>Consultation Fee Summary</a>`
+  console.log(message)
+  const url = 'https://pffm.azurewebsites.net/notices'
+  let notification = {
+    'name': clientId,
+    'notice' : message 
+  }
+  const header = {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin" : "*"
+  }
+  
+  fetch(url, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(notification)
+  })
+    .then(() => console.log('notice sent'))
+    .catch(console.error)
+}
+ 
+function clearForm() {
+  newForm = {}
+  document.querySelector('input#clientName').value = '';
+  document.querySelector('input#employeeName').value = '';
+  for (let i = 1; i < 4; i++) {
+    document.getElementById(`date${i}`).innerHTML = ''
+    document.getElementById(`min${i}`).innerHTML = ''
+    document.getElementById(`goal${i}`).innerHTML = ''
+    document.getElementById(`hour${i}`).innerHTML = ''
+    document.getElementById(`serviceSummary${i}`).innerHTML = ''
+  }
+}
