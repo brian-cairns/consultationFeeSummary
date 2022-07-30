@@ -127,15 +127,19 @@ async function submitForm(data, form) {
     },
     body: JSON.stringify(document)
   })
-    .then((response) => {
-      console.log(response)
-      if (response.status == 200) {
-      showSuccess()
-      } else {
-        showError(response.body)
-      }
-    })
+    .then(response => response.json())
+    .then(data => respond(data)) 
     .catch((err) => showError(err))
+}
+
+function respond(data) {
+  let formId = data.formId
+  if (formId) {
+    showSuccess()
+    sendNotification(formId)
+  } else {
+    showError(data.error)
+  }
 }
 
 function showSuccess() {
@@ -147,4 +151,6 @@ function showError(err) {
     document.getElementById('returnMessage').innerHTML = `An error occurred when submitting this form, which was ${err}. Please contact the administrator for help.`
 }
 
-async function sendNotification() { }
+async function sendNotification(id) {
+  console.log(id)
+ }
