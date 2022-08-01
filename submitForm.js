@@ -3,12 +3,14 @@ console.log(submit)
 const formName = 'consultationFee'
 console.log('form: ' + formName)
 let newForm = {}
+let client = ''
 
 let clientId = document.querySelector('input#clientName')
 clientId.addEventListener('change', (e) => {
 	console.log('changed')
 	newForm.clientId = e.target.value;
   console.log(newForm.clientId);
+  client = newForm.clientId
   })
   
 let employeeName = document.querySelector('input#employeeName')
@@ -107,6 +109,8 @@ serviceSummary3.addEventListener('change', (e) => {
   console.log(newForm.serviceSummary3);
 })
 
+let printForm = document.getElementById('printToPDF')
+printForm.style.display = 'none'
 
 document.getElementById('submit').addEventListener("click", async (event) => {
 	console.log('click')
@@ -146,7 +150,11 @@ function respond(data) {
 }
 
 function showSuccess() {
-    document.getElementById('returnMessage').innerHTML = 'Form has been successfully submitted'
+  document.getElementById('returnMessage').innerHTML = 'Form has been successfully submitted'
+  printForm.style.display = 'inline'
+  printForm.addEventListener('click', (e) => {
+    location.href = `https://phoenix-freedom-foundation-backend.webflow.io/completed-forms/consultation-fee-summary?${client}`
+  })
 }
 
 function showError(err) {
